@@ -20,7 +20,6 @@ Example Usage:
 
 import gradio as gr
 from src.chat import Chatbot
-from src.facility_search import search as facility_search
 from src.retrieval import find_matching_facilities
 from src.search_criteria import ready_to_search
 
@@ -91,7 +90,7 @@ def create_chatbot():
                 chatbot.add_to_memory(message, reply)
                 return reply
             # options = facility_search(criteria)
-            options = find_matching_facilities(message, chatbot.get_memory())
+            options = find_matching_facilities(message, chatbot.get_memory(), top_k=3, criteria=criteria)
             print("options: ", options)
             explanation = chatbot.explain_facility_options(options)
             chatbot.add_to_memory(message, explanation)

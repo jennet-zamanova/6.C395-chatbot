@@ -1,5 +1,7 @@
 import pandas as pd
 
+from src.search_criteria import SearchCriteria
+
 DATA_PATH = "data/boston_samhsa_clean.csv"
 
 
@@ -54,9 +56,7 @@ def load_data():
     return df
 
 
-def extract_constraints(user_message, history=None):
-    text = user_message.lower()
-
+def extract_constraints(user_message, history=None, criteria: SearchCriteria | None=None):
     constraints = {
         "mental_health": False,
         "substance_use": False,
@@ -81,6 +81,59 @@ def extract_constraints(user_message, history=None):
         "opioid_treatment_program": False,
         "medication_assisted_treatment": False,
     }
+
+    # location_city: str
+    # location_state: str
+    # location_zip: str
+
+    # A) Fill from criteria if provided
+    if criteria:
+        # treatment_type
+        t = (criteria.get("treatment_type") or "").lower()
+        if "outpatient" in t:
+            constraints["outpatient"] = True
+        if "inpatient" in t:
+            constraints["inpatient"] = True
+        if "residential" in t:
+            constraints["residential"] = True
+        if "telehealth" in t:
+            constraints["telehealth"] = True
+        # payment_options
+        pays = [p.lower() for p in criteria.get("payment_options", [])]
+        if any("medicaid" in p for p in pays):
+            constraints["medicaid"] = True
+        if any("sliding" in p for p in pays):
+            constraints["sliding_fee_scale"] = True
+        if any("private" in p or "insurance" in p for p in pays):
+            constraints["private_insurance"] = True
+        # special_populations
+        pops = [p.lower() for p in criteria.get("special_populations", [])]
+        if any("veteran" in p for p in pops):
+            constraints["veterans"] = True
+        if any("adolescent" in p or "teen" in p for p in pops):
+            constraints["adolescents"] = True
+        if any("pregnant" in p or "postpartum" in p for p in pops):
+            constraints["pregnant_postpartum"] = True
+        # therapies
+        ths = [t.lower() for t in criteria.get("therapies", [])]
+        if any("cbt" in t for t in ths):
+            constraints["cbt"] = True
+        if any("dbt" in t for t in ths):
+            constraints["dbt"] = True
+        if any("mat" in t or "medication" in t for t in ths):
+            constraints["medication_assisted_treatment"] = True
+        # languages
+        langs = [l.lower() for l in criteria.get("languages", [])]
+        if any("spanish" in l for l in langs):
+            constraints["spanish_support"] = True
+        if any("asl" in l or "sign" in l for l in langs):
+            constraints["asl_support"] = True
+
+        substances = [s.lower() for s in criteria.get("substances", [])]
+        if any("opioid" in s for s in substances):
+            constraints["opioid_treatment_program"] = True
+        if len(substances) != 0:
+            constraints["substance_use"] = True
 
     mh_keywords = [
         "mental health",
@@ -110,6 +163,14 @@ def extract_constraints(user_message, history=None):
         "sober",
         "use disorder",
     ]
+
+    texts = []
+    if history:
+        for message in history:
+            if message["role"] == "user":
+                texts.append(str(message["content"]))
+    texts.append(user_message)
+    text = " ".join(t.lower() for t in texts)
 
     if any(k in text for k in mh_keywords):
         constraints["mental_health"] = True
@@ -373,9 +434,9 @@ def format_results(df, constraints, top_k=5):
     return results
 
 
-def find_matching_facilities(user_message, history=None, top_k=5):
+def find_matching_facilities(user_message, history=None, top_k=5, criteria: SearchCriteria | None=None):
     df = load_data()
-    constraints = extract_constraints(user_message, history)
+    constraints = extract_constraints(user_message, history, criteria)
     filtered = filter_facilities(df, constraints)
 
     if filtered.empty:

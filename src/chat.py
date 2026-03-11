@@ -5,7 +5,6 @@ from huggingface_hub import InferenceClient
 from config import BASE_MODEL, MY_MODEL, HF_TOKEN
 from src.retrieval import find_matching_facilities
 from src.search_criteria import SearchCriteria, FacilityOption, ready_to_search
-from src.facility_search import search as facility_search
 
 # Keys we collect from the user for facility search (must match SearchCriteria)
 CRITERIA_KEYS = [
@@ -139,7 +138,7 @@ class Chatbot:
                 if ready_to_search(criteria):
                     print("criteria: ", criteria)
                     # options = facility_search(criteria)
-                    options = find_matching_facilities(user_input, self.memory)
+                    options = find_matching_facilities(user_input, self.memory, top_k=3, criteria=criteria)
                     print("options: ", options)
                     explanation = self.explain_facility_options(options)
                     combined = response + "\n\n" + explanation
