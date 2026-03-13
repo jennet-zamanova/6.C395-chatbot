@@ -40,16 +40,16 @@ test_cases = [
 
 def evaluate_retrieval(query, expected_facilities, criteria_dict=None, top_k=5):
     """
-    评估单个检索案例
+    Evaluate a single retrieval case
 
     Args:
-        query (str): 用户查询
-        expected_facilities (list): 预期设施名称列表
-        criteria_dict (dict): 搜索标准
-        top_k (int): 返回前k个结果
+        query (str): User query
+        expected_facilities (list): List of expected facility names
+        criteria_dict (dict): Search criteria
+        top_k (int): Return top k results
 
     Returns:
-        dict: 评估指标
+        dict: Evaluation metrics
     """
 
     criteria = SearchCriteria()
@@ -63,7 +63,7 @@ def evaluate_retrieval(query, expected_facilities, criteria_dict=None, top_k=5):
         results = find_matching_facilities(query, [], top_k=top_k, criteria=criteria)
         retrieved_facilities = [r.get('facility_name', '') for r in results]
     except Exception as e:
-        print(f"检索错误: {e}")
+        print(f"Retrieval error: {e}")
         retrieved_facilities = []
 
 
@@ -91,14 +91,14 @@ def evaluate_retrieval(query, expected_facilities, criteria_dict=None, top_k=5):
     }
 
 def run_evaluation():
-    """运行所有测试案例并计算平均指标"""
+ 
     results = []
 
-    print("开始评估设施检索性能...")
+    print("Starting facility retrieval performance evaluation...")
     print("=" * 60)
 
     for i, case in enumerate(test_cases, 1):
-        print(f"\n测试案例 {i}: {case['query']}")
+        print(f"\nTest case {i}: {case['query']}")
         result = evaluate_retrieval(
             case['query'],
             case['expected_facilities'],
@@ -107,8 +107,8 @@ def run_evaluation():
         )
         results.append(result)
 
-        print(f"检索结果: {result['retrieved']}")
-        print(f"预期结果: {result['expected']}")
+        print(f"Retrieved results: {result['retrieved']}")
+        print(f"Expected results: {result['expected']}")
         print(".3f")
         print(".3f")
         print(".3f")
@@ -119,16 +119,16 @@ def run_evaluation():
     avg_recall = sum(r['recall'] for r in results) / len(results)
     avg_f1 = sum(r['f1_score'] for r in results) / len(results)
 
-    print("\n总体评估结果:")
-    print(".3f")
-    print(".3f")
-    print(".3f")
+    print("\nOverall evaluation results:")
+    print(f"Average Precision: {avg_precision:.3f}")
+    print(f"Average Recall: {avg_recall:.3f}")
+    print(f"Average F1 Score: {avg_f1:.3f}")
 
 
     with open('evaluation_results.json', 'w', encoding='utf-8') as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
 
-    print("\n详细结果已保存到 evaluation_results.json")
+    print("\nDetailed results saved to evaluation_results.json")
 
     return results
 
