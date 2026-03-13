@@ -14,7 +14,7 @@ df = pd.read_csv(DATA_PATH)
 test_cases = [
     {
         "query": "I need opioid treatment in Boston",
-        "required_attributes": ["opioid_treatment_program"],  # Facilities must have opioid treatment
+        "required_attributes": ["opioid_treatment_program"],
         "criteria": {
             "location_city": "Boston",
             "substances": ["opioids"]
@@ -22,7 +22,7 @@ test_cases = [
     },
     {
         "query": "Mental health services for veterans",
-        "required_attributes": ["veterans"],  # Facilities must support veterans
+        "required_attributes": ["veterans"],
         "criteria": {
             "special_populations": ["veterans"],
             "treatment_type": "outpatient"
@@ -30,10 +30,178 @@ test_cases = [
     },
     {
         "query": "Spanish speaking facilities in Boston",
-        "required_attributes": ["spanish_support"],  # Facilities must support Spanish
+        "required_attributes": ["spanish_support"],
         "criteria": {
             "languages": ["Spanish"],
             "location_city": "Boston"
+        }
+    },
+
+    {
+        "query": "I need telehealth mental health support",
+        "required_attributes": ["telehealth", "mental_health"],
+        "criteria": {
+            "treatment_type": "outpatient"
+        }
+    },
+    {
+        "query": "Looking for residential substance use treatment",
+        "required_attributes": ["residential", "substance_use"],
+        "criteria": {
+            "substances": ["alcohol", "drugs"]
+        }
+    },
+    {
+        "query": "I need inpatient care for substance use",
+        "required_attributes": ["inpatient", "substance_use"],
+        "criteria": {
+            "treatment_type": "inpatient"
+        }
+    },
+    {
+        "query": "Need intensive outpatient addiction treatment",
+        "required_attributes": ["intensive_outpatient", "substance_use"],
+        "criteria": {
+            "treatment_type": "intensive_outpatient"
+        }
+    },
+    {
+        "query": "Looking for partial hospitalization mental health services",
+        "required_attributes": ["partial_hospitalization", "mental_health"],
+        "criteria": {
+            "treatment_type": "partial_hospitalization"
+        }
+    },
+    {
+        "query": "Need medication assisted treatment for opioid use",
+        "required_attributes": ["medication_assisted_treatment", "substance_use"],
+        "criteria": {
+            "substances": ["opioids"]
+        }
+    },
+    {
+        "query": "Looking for CBT therapy in Boston",
+        "required_attributes": ["cbt", "mental_health"],
+        "criteria": {
+            "location_city": "Boston"
+        }
+    },
+    {
+        "query": "I need DBT treatment near Boston",
+        "required_attributes": ["dbt", "mental_health"],
+        "criteria": {
+            "location_city": "Boston"
+        }
+    },
+    {
+        "query": "Need care for adolescents with substance use issues",
+        "required_attributes": ["adolescents", "substance_use"],
+        "criteria": {
+            "special_populations": ["adolescents"]
+        }
+    },
+    {
+        "query": "Looking for services for pregnant or postpartum patients",
+        "required_attributes": ["pregnant_postpartum"],
+        "criteria": {
+            "special_populations": ["pregnant_postpartum"]
+        }
+    },
+    {
+        "query": "I need ASL-supported mental health treatment",
+        "required_attributes": ["asl_support", "mental_health"],
+        "criteria": {}
+    },
+    {
+        "query": "Looking for Spanish-speaking addiction treatment with telehealth",
+        "required_attributes": ["spanish_support", "telehealth", "substance_use"],
+        "criteria": {
+            "languages": ["Spanish"]
+        }
+    },
+    {
+        "query": "Need outpatient treatment that accepts Medicaid",
+        "required_attributes": ["outpatient", "medicaid"],
+        "criteria": {
+            "treatment_type": "outpatient"
+        }
+    },
+    {
+        "query": "Looking for mental health treatment that accepts Medicare",
+        "required_attributes": ["mental_health", "medicare"],
+        "criteria": {}
+    },
+    {
+        "query": "Need treatment covered by private insurance",
+        "required_attributes": ["private_insurance"],
+        "criteria": {}
+    },
+    {
+        "query": "Looking for a facility that accepts TRICARE",
+        "required_attributes": ["tricare"],
+        "criteria": {}
+    },
+    {
+        "query": "I need affordable treatment with sliding fee scale",
+        "required_attributes": ["sliding_fee_scale"],
+        "criteria": {}
+    },
+    {
+        "query": "Looking for treatment that allows cash payment",
+        "required_attributes": ["cash_payment"],
+        "criteria": {}
+    },
+    {
+        "query": "Need Boston outpatient mental health services in Spanish",
+        "required_attributes": ["outpatient", "mental_health", "spanish_support"],
+        "criteria": {
+            "location_city": "Boston",
+            "languages": ["Spanish"],
+            "treatment_type": "outpatient"
+        }
+    },
+    {
+        "query": "Looking for Boston substance use treatment for veterans",
+        "required_attributes": ["substance_use", "veterans"],
+        "criteria": {
+            "location_city": "Boston",
+            "special_populations": ["veterans"]
+        }
+    },
+    {
+        "query": "Need residential care for pregnant patients with substance use issues",
+        "required_attributes": ["residential", "pregnant_postpartum", "substance_use"],
+        "criteria": {
+            "special_populations": ["pregnant_postpartum"]
+        }
+    },
+    {
+        "query": "Need adolescent outpatient mental health treatment",
+        "required_attributes": ["adolescents", "outpatient", "mental_health"],
+        "criteria": {
+            "special_populations": ["adolescents"],
+            "treatment_type": "outpatient"
+        }
+    },
+    {
+        "query": "Looking for telehealth services that accept Medicaid",
+        "required_attributes": ["telehealth", "medicaid"],
+        "criteria": {}
+    },
+    {
+        "query": "Need Boston inpatient mental health support",
+        "required_attributes": ["inpatient", "mental_health"],
+        "criteria": {
+            "location_city": "Boston",
+            "treatment_type": "inpatient"
+        }
+    },
+    {
+        "query": "Looking for Boston facilities with medication assisted treatment",
+        "required_attributes": ["medication_assisted_treatment", "substance_use"],
+        "criteria": {
+            "location_city": "Boston",
+            "substances": ["opioids"]
         }
     }
 ]
@@ -152,7 +320,7 @@ def run_evaluation():
                 serializable_result[key] = value
         results_serializable.append(serializable_result)
 
-    with open('evaluation_results.json', 'w', encoding='utf-8') as f:
+    with open('evaluation_results_test.json', 'w', encoding='utf-8') as f:
         json.dump(results_serializable, f, indent=2, ensure_ascii=False)
 
     print("\nDetailed results saved to evaluation_results.json")

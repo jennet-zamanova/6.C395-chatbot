@@ -1,0 +1,530 @@
+[
+  {
+    "query": "I need opioid treatment in Boston",
+    "retrieved": [
+      "Dimock Center",
+      "Bay Cove Treatment Center",
+      "Boston Comprehensive Treatment Center",
+      "Healthcare Resource Centers",
+      "Boston Medical Center/Brighton"
+    ],
+    "required_attributes": [
+      "opioid_treatment_program"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.18518518518518517,
+    "f1_score": 0.3125,
+    "total_with_attributes": 27
+  },
+  {
+    "query": "Mental health services for veterans",
+    "retrieved": [
+      "Community Services Institute",
+      "Casa Esperanza Inc",
+      "Casa Esperanza Inc",
+      "Hope House Inc",
+      "Beth Israel Deaconess Medical Center"
+    ],
+    "required_attributes": [
+      "veterans"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.06578947368421052,
+    "f1_score": 0.12345679012345677,
+    "total_with_attributes": 76
+  },
+  {
+    "query": "Spanish speaking facilities in Boston",
+    "retrieved": [
+      "Bay Cove Treatment Center",
+      "Boston Comprehensive Treatment Center",
+      "Boston Healthcare for the Homeless Inc",
+      "Boston Medical Center",
+      "Casa Esperanza Inc"
+    ],
+    "required_attributes": [
+      "spanish_support"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.052083333333333336,
+    "f1_score": 0.09900990099009901,
+    "total_with_attributes": 96
+  },
+  {
+    "query": "I need telehealth mental health support",
+    "retrieved": [
+      "Bay Cove Treatment Center",
+      "North End Waterfront Health",
+      "North Suffolk Community Services",
+      "North Suffolk Community Services",
+      "Tufts Medical Center"
+    ],
+    "required_attributes": [
+      "telehealth",
+      "mental_health"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.03125,
+    "f1_score": 0.06060606060606061,
+    "total_with_attributes": 160
+  },
+  {
+    "query": "Looking for residential substance use treatment",
+    "retrieved": [
+      "Dimock Center",
+      "Casa Esperanza Inc",
+      "Hello House Burt Street",
+      "Boston Public Health Commission",
+      "Dimock Center"
+    ],
+    "required_attributes": [
+      "residential",
+      "substance_use"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.029069767441860465,
+    "f1_score": 0.05649717514124294,
+    "total_with_attributes": 172
+  },
+  {
+    "query": "I need inpatient care for substance use",
+    "retrieved": [
+      "Boston Medical Center",
+      "Gavin Foundation",
+      "North Suffolk Community Services",
+      "Bay Cove Treatment Center",
+      "Hello House Burt Street"
+    ],
+    "required_attributes": [
+      "inpatient",
+      "substance_use"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.029069767441860465,
+    "f1_score": 0.05649717514124294,
+    "total_with_attributes": 172
+  },
+  {
+    "query": "Need intensive outpatient addiction treatment",
+    "retrieved": [
+      "Gavin Foundation",
+      "North Suffolk Community Services",
+      "Boston Medical Center/Brighton",
+      "Arbour Counseling Services",
+      "Casa Esperanza Inc"
+    ],
+    "required_attributes": [
+      "intensive_outpatient",
+      "substance_use"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.029069767441860465,
+    "f1_score": 0.05649717514124294,
+    "total_with_attributes": 172
+  },
+  {
+    "query": "Looking for partial hospitalization mental health services",
+    "retrieved": [
+      "North Suffolk Community Services",
+      "Arbour Counseling Services",
+      "Brigham and Womens Faulkner Hospital",
+      "Hope House Inc",
+      "Dimock Center"
+    ],
+    "required_attributes": [
+      "partial_hospitalization",
+      "mental_health"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.03968253968253968,
+    "f1_score": 0.07633587786259541,
+    "total_with_attributes": 126
+  },
+  {
+    "query": "Need medication assisted treatment for opioid use",
+    "retrieved": [
+      "Dimock Center",
+      "Boston Medical Center/Brighton",
+      "HRI Hospital",
+      "Boston Medical Center",
+      "Casa Esperanza Inc"
+    ],
+    "required_attributes": [
+      "medication_assisted_treatment",
+      "substance_use"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.029069767441860465,
+    "f1_score": 0.05649717514124294,
+    "total_with_attributes": 172
+  },
+  {
+    "query": "Looking for CBT therapy in Boston",
+    "retrieved": [
+      "Bay Cove Treatment Center",
+      "Dr Solomon Carter Fuller Mental Health",
+      "North End Waterfront Health",
+      "North Suffolk Community Services",
+      "North Suffolk Community Services"
+    ],
+    "required_attributes": [
+      "cbt",
+      "mental_health"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.028089887640449437,
+    "f1_score": 0.0546448087431694,
+    "total_with_attributes": 178
+  },
+  {
+    "query": "I need DBT treatment near Boston",
+    "retrieved": [
+      "Bay Cove Treatment Center",
+      "Dr Solomon Carter Fuller Mental Health",
+      "North End Waterfront Health",
+      "North Suffolk Community Services",
+      "North Suffolk Community Services"
+    ],
+    "required_attributes": [
+      "dbt",
+      "mental_health"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.03968253968253968,
+    "f1_score": 0.07633587786259541,
+    "total_with_attributes": 126
+  },
+  {
+    "query": "Need care for adolescents with substance use issues",
+    "retrieved": [
+      "Boston Medical Center",
+      "Dimock Center",
+      "Casa Esperanza Inc",
+      "Gavin Foundation",
+      "North Suffolk Community Services"
+    ],
+    "required_attributes": [
+      "adolescents",
+      "substance_use"
+    ],
+    "matching_count": 1,
+    "precision": 0.2,
+    "recall": 0.005813953488372093,
+    "f1_score": 0.011299435028248586,
+    "total_with_attributes": 172
+  },
+  {
+    "query": "Looking for services for pregnant or postpartum patients",
+    "retrieved": [
+      "Bay Cove Treatment Center",
+      "Boston Comprehensive Treatment Center",
+      "Boston Medical Center",
+      "Dimock Center",
+      "Healthcare Resource Centers"
+    ],
+    "required_attributes": [
+      "pregnant_postpartum"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.08333333333333333,
+    "f1_score": 0.15384615384615385,
+    "total_with_attributes": 60
+  },
+  {
+    "query": "I need ASL-supported mental health treatment",
+    "retrieved": [
+      "Bay Cove Treatment Center",
+      "North End Waterfront Health",
+      "North Suffolk Community Services",
+      "North Suffolk Community Services",
+      "North Suffolk Community Services"
+    ],
+    "required_attributes": [
+      "asl_support",
+      "mental_health"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.03968253968253968,
+    "f1_score": 0.07633587786259541,
+    "total_with_attributes": 126
+  },
+  {
+    "query": "Looking for Spanish-speaking addiction treatment with telehealth",
+    "retrieved": [
+      "Boston Medical Center",
+      "Casa Esperanza Inc",
+      "North Suffolk Community Services",
+      "Bay Cove Treatment Center",
+      "Boston Comprehensive Treatment Center"
+    ],
+    "required_attributes": [
+      "spanish_support",
+      "telehealth",
+      "substance_use"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.029069767441860465,
+    "f1_score": 0.05649717514124294,
+    "total_with_attributes": 172
+  },
+  {
+    "query": "Need outpatient treatment that accepts Medicaid",
+    "retrieved": [
+      "Bay Cove Treatment Center",
+      "Beth Israel Deaconess Medical Center",
+      "Bicycle Health",
+      "Boston Comprehensive Treatment Center",
+      "Boston Healthcare for the Homeless Inc"
+    ],
+    "required_attributes": [
+      "outpatient",
+      "medicaid"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.03048780487804878,
+    "f1_score": 0.05917159763313609,
+    "total_with_attributes": 164
+  },
+  {
+    "query": "Looking for mental health treatment that accepts Medicare",
+    "retrieved": [
+      "Bay Cove Treatment Center",
+      "Dr Solomon Carter Fuller Mental Health",
+      "North End Waterfront Health",
+      "North Suffolk Community Services",
+      "North Suffolk Community Services"
+    ],
+    "required_attributes": [
+      "mental_health",
+      "medicare"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.03731343283582089,
+    "f1_score": 0.07194244604316546,
+    "total_with_attributes": 134
+  },
+  {
+    "query": "Need treatment covered by private insurance",
+    "retrieved": [
+      "Bay Cove Treatment Center",
+      "Beth Israel Deaconess Medical Center",
+      "Bicycle Health",
+      "Boston Comprehensive Treatment Center",
+      "Boston Healthcare for the Homeless Inc"
+    ],
+    "required_attributes": [
+      "private_insurance"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.030120481927710843,
+    "f1_score": 0.058479532163742694,
+    "total_with_attributes": 166
+  },
+  {
+    "query": "Looking for a facility that accepts TRICARE",
+    "retrieved": [
+      "Beth Israel Deaconess Medical Center",
+      "Boston Comprehensive Treatment Center",
+      "Boston Medical Center",
+      "Healthcare Resource Centers",
+      "North End Waterfront Health"
+    ],
+    "required_attributes": [
+      "tricare"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.05555555555555555,
+    "f1_score": 0.10526315789473684,
+    "total_with_attributes": 90
+  },
+  {
+    "query": "I need affordable treatment with sliding fee scale",
+    "retrieved": [
+      "Bay Cove Treatment Center",
+      "Beth Israel Deaconess Medical Center",
+      "Bicycle Health",
+      "Boston Comprehensive Treatment Center",
+      "Boston Healthcare for the Homeless Inc"
+    ],
+    "required_attributes": [
+      "sliding_fee_scale"
+    ],
+    "matching_count": 0,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1_score": 0,
+    "total_with_attributes": 19
+  },
+  {
+    "query": "Looking for treatment that allows cash payment",
+    "retrieved": [
+      "Bay Cove Treatment Center",
+      "Beth Israel Deaconess Medical Center",
+      "Bicycle Health",
+      "Boston Comprehensive Treatment Center",
+      "Boston Healthcare for the Homeless Inc"
+    ],
+    "required_attributes": [
+      "cash_payment"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.03205128205128205,
+    "f1_score": 0.062111801242236024,
+    "total_with_attributes": 156
+  },
+  {
+    "query": "Need Boston outpatient mental health services in Spanish",
+    "retrieved": [
+      "Bay Cove Treatment Center",
+      "North End Waterfront Health",
+      "North Suffolk Community Services",
+      "NEW Health Charlestown",
+      "Community Services Institute"
+    ],
+    "required_attributes": [
+      "outpatient",
+      "mental_health",
+      "spanish_support"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.037037037037037035,
+    "f1_score": 0.07142857142857142,
+    "total_with_attributes": 135
+  },
+  {
+    "query": "Looking for Boston substance use treatment for veterans",
+    "retrieved": [
+      "Dimock Center",
+      "Casa Esperanza Inc",
+      "Boston Comprehensive Treatment Center",
+      "Boston Medical Center/Brighton",
+      "Andrew House Boston"
+    ],
+    "required_attributes": [
+      "substance_use",
+      "veterans"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.029069767441860465,
+    "f1_score": 0.05649717514124294,
+    "total_with_attributes": 172
+  },
+  {
+    "query": "Need residential care for pregnant patients with substance use issues",
+    "retrieved": [
+      "Dimock Center",
+      "Boston Public Health Commission",
+      "Dimock Center",
+      "Casa Esperanza Inc",
+      "BHN Dorchester Family Center"
+    ],
+    "required_attributes": [
+      "residential",
+      "pregnant_postpartum",
+      "substance_use"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.029069767441860465,
+    "f1_score": 0.05649717514124294,
+    "total_with_attributes": 172
+  },
+  {
+    "query": "Need adolescent outpatient mental health treatment",
+    "retrieved": [
+      "Boston Medical Center",
+      "Fathers Uplift Family Group LLC",
+      "Bay Cove Treatment Center",
+      "North End Waterfront Health",
+      "North Suffolk Community Services"
+    ],
+    "required_attributes": [
+      "adolescents",
+      "outpatient",
+      "mental_health"
+    ],
+    "matching_count": 2,
+    "precision": 0.4,
+    "recall": 0.014814814814814815,
+    "f1_score": 0.02857142857142857,
+    "total_with_attributes": 135
+  },
+  {
+    "query": "Looking for telehealth services that accept Medicaid",
+    "retrieved": [
+      "Bay Cove Treatment Center",
+      "Beth Israel Deaconess Medical Center",
+      "Bicycle Health",
+      "Boston Comprehensive Treatment Center",
+      "Boston Healthcare for the Homeless Inc"
+    ],
+    "required_attributes": [
+      "telehealth",
+      "medicaid"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.03048780487804878,
+    "f1_score": 0.05917159763313609,
+    "total_with_attributes": 164
+  },
+  {
+    "query": "Need Boston inpatient mental health support",
+    "retrieved": [
+      "Bay Cove Treatment Center",
+      "Dr Solomon Carter Fuller Mental Health",
+      "North End Waterfront Health",
+      "North Suffolk Community Services",
+      "North Suffolk Community Services"
+    ],
+    "required_attributes": [
+      "inpatient",
+      "mental_health"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.03968253968253968,
+    "f1_score": 0.07633587786259541,
+    "total_with_attributes": 126
+  },
+  {
+    "query": "Looking for Boston facilities with medication assisted treatment",
+    "retrieved": [
+      "Dimock Center",
+      "Boston Medical Center/Brighton",
+      "HRI Hospital",
+      "Boston Medical Center",
+      "Casa Esperanza Inc"
+    ],
+    "required_attributes": [
+      "medication_assisted_treatment",
+      "substance_use"
+    ],
+    "matching_count": 5,
+    "precision": 1.0,
+    "recall": 0.029069767441860465,
+    "f1_score": 0.05649717514124294,
+    "total_with_attributes": 172
+  }
+]
