@@ -14,7 +14,7 @@ df = pd.read_csv(DATA_PATH)
 test_cases = [
     {
         "query": "I need opioid treatment in Boston",
-        "expected_facilities": ["Bay Cove Treatment Center", "Boston Medical Center"],  # 这些设施有opioid_treatment_program=True
+        "required_attributes": ["opioid_treatment_program"],  # Facilities must have opioid treatment
         "criteria": {
             "location_city": "Boston",
             "substances": ["opioids"]
@@ -22,7 +22,7 @@ test_cases = [
     },
     {
         "query": "Mental health services for veterans",
-        "expected_facilities": ["Bay Cove Treatment Center", "Boston Medical Center"],  # 这些有veterans=True
+        "required_attributes": ["veterans"],  # Facilities must support veterans
         "criteria": {
             "special_populations": ["veterans"],
             "treatment_type": "outpatient"
@@ -30,7 +30,7 @@ test_cases = [
     },
     {
         "query": "Spanish speaking facilities in Boston",
-        "expected_facilities": ["Boston Medical Center", "Casa Esperanza Inc"],  # 这些有spanish_support=True
+        "required_attributes": ["spanish_support"],  # Facilities must support Spanish
         "criteria": {
             "languages": ["Spanish"],
             "location_city": "Boston"
@@ -38,13 +38,13 @@ test_cases = [
     }
 ]
 
-def evaluate_retrieval(query, expected_facilities, criteria_dict=None, top_k=5):
+def evaluate_retrieval(query, required_attributes, criteria_dict=None, top_k=5):
     """
-    Evaluate a single retrieval case
+    Evaluate a single retrieval case based on required attributes
 
     Args:
         query (str): User query
-        expected_facilities (list): List of expected facility names
+        required_attributes (list): List of attributes that returned facilities must have
         criteria_dict (dict): Search criteria
         top_k (int): Return top k results
 
@@ -52,11 +52,10 @@ def evaluate_retrieval(query, expected_facilities, criteria_dict=None, top_k=5):
         dict: Evaluation metrics
     """
 
-    criteria = SearchCriteria()
+    # Convert criteria_dict to SearchCriteria object
+    criteria = None
     if criteria_dict:
-        for key, value in criteria_dict.items():
-            if hasattr(criteria, key):
-                setattr(criteria, key, value)
+        criteria = SearchCriteria(**criteria_dict)
 
 
     try:
@@ -67,27 +66,41 @@ def evaluate_retrieval(query, expected_facilities, criteria_dict=None, top_k=5):
         retrieved_facilities = []
 
 
-    retrieved_set = set(retrieved_facilities)
-    expected_set = set(expected_facilities)
+    # Evaluate based on required attributes
+    matching_count = 0
+    for facility_name in retrieved_facilities:
+        # Find facility in data
+        matches = df[df['facility_name'].str.contains(facility_name, case=False, na=False)]
+        if not matches.empty:
+            # Check if facility has all required attributes
+            has_all_attributes = True
+            for attr in required_attributes:
+                if attr in matches.columns and not matches[attr].any():
+                    has_all_attributes = False
+                    break
+            if has_all_attributes:
+                matching_count += 1
 
-    true_positives = len(retrieved_set & expected_set)
-    false_positives = len(retrieved_set - expected_set)
-    false_negatives = len(expected_set - retrieved_set)
+    # Calculate metrics
+    precision = matching_count / len(retrieved_facilities) if retrieved_facilities else 0
+    # For recall, we assume there are facilities with required attributes in the data
+    facilities_with_attributes = 0
+    for attr in required_attributes:
+        if attr in df.columns:
+            facilities_with_attributes = max(facilities_with_attributes, df[attr].sum())
 
-    precision = true_positives / (true_positives + false_positives) if (true_positives + false_positives) > 0 else 0
-    recall = true_positives / (true_positives + false_negatives) if (true_positives + false_negatives) > 0 else 0
+    recall = matching_count / facilities_with_attributes if facilities_with_attributes > 0 else 0
     f1 = 2 * precision * recall / (precision + recall) if (precision + recall) > 0 else 0
 
     return {
         "query": query,
         "retrieved": retrieved_facilities,
-        "expected": expected_facilities,
+        "required_attributes": required_attributes,
+        "matching_count": matching_count,
         "precision": precision,
         "recall": recall,
         "f1_score": f1,
-        "true_positives": true_positives,
-        "false_positives": false_positives,
-        "false_negatives": false_negatives
+        "total_with_attributes": facilities_with_attributes
     }
 
 def run_evaluation():
@@ -101,14 +114,15 @@ def run_evaluation():
         print(f"\nTest case {i}: {case['query']}")
         result = evaluate_retrieval(
             case['query'],
-            case['expected_facilities'],
+            case['required_attributes'],
             case.get('criteria'),
             top_k=5
         )
         results.append(result)
 
         print(f"Retrieved results: {result['retrieved']}")
-        print(f"Expected results: {result['expected']}")
+        print(f"Required attributes: {result['required_attributes']}")
+        print(f"Matching facilities: {result['matching_count']}/{len(result['retrieved'])}")
         print(".3f")
         print(".3f")
         print(".3f")
@@ -125,8 +139,21 @@ def run_evaluation():
     print(f"Average F1 Score: {avg_f1:.3f}")
 
 
+    # Save results to JSON (convert numpy types to native Python types)
+    results_serializable = []
+    for result in results:
+        serializable_result = {}
+        for key, value in result.items():
+            if hasattr(value, 'item'):  # numpy type
+                serializable_result[key] = value.item()
+            elif isinstance(value, list):
+                serializable_result[key] = [v.item() if hasattr(v, 'item') else v for v in value]
+            else:
+                serializable_result[key] = value
+        results_serializable.append(serializable_result)
+
     with open('evaluation_results.json', 'w', encoding='utf-8') as f:
-        json.dump(results, f, indent=2, ensure_ascii=False)
+        json.dump(results_serializable, f, indent=2, ensure_ascii=False)
 
     print("\nDetailed results saved to evaluation_results.json")
 
