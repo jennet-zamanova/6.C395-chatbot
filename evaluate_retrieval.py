@@ -1,8 +1,4 @@
-"""
-评估聊天机器人检索性能
 
-此脚本评估设施检索功能的准确性，包括精确度、召回率和F1分数。
-"""
 
 import pandas as pd
 from src.retrieval import find_matching_facilities
@@ -10,11 +6,11 @@ from src.search_criteria import SearchCriteria
 from sklearn.metrics import precision_score, recall_score, f1_score
 import json
 
-# 加载数据以获取实际设施名称
+
 DATA_PATH = "data/boston_samhsa_clean.csv"
 df = pd.read_csv(DATA_PATH)
 
-# 定义测试案例：输入查询和预期设施（基于实际数据）
+
 test_cases = [
     {
         "query": "I need opioid treatment in Boston",
@@ -55,14 +51,14 @@ def evaluate_retrieval(query, expected_facilities, criteria_dict=None, top_k=5):
     Returns:
         dict: 评估指标
     """
-    # 转换标准为SearchCriteria对象
+
     criteria = SearchCriteria()
     if criteria_dict:
         for key, value in criteria_dict.items():
             if hasattr(criteria, key):
                 setattr(criteria, key, value)
 
-    # 执行检索
+
     try:
         results = find_matching_facilities(query, [], top_k=top_k, criteria=criteria)
         retrieved_facilities = [r.get('facility_name', '') for r in results]
@@ -70,7 +66,7 @@ def evaluate_retrieval(query, expected_facilities, criteria_dict=None, top_k=5):
         print(f"检索错误: {e}")
         retrieved_facilities = []
 
-    # 计算指标
+
     retrieved_set = set(retrieved_facilities)
     expected_set = set(expected_facilities)
 
@@ -118,7 +114,7 @@ def run_evaluation():
         print(".3f")
         print("-" * 40)
 
-    # 计算平均指标
+
     avg_precision = sum(r['precision'] for r in results) / len(results)
     avg_recall = sum(r['recall'] for r in results) / len(results)
     avg_f1 = sum(r['f1_score'] for r in results) / len(results)
@@ -128,7 +124,7 @@ def run_evaluation():
     print(".3f")
     print(".3f")
 
-    # 保存结果到文件
+
     with open('evaluation_results.json', 'w', encoding='utf-8') as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
 
